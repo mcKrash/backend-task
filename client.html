@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Backend Task</title>
+</head>
+
+<body>
+    <div>Subscribe
+        <button onclick="sub()">Subscribe</button></div>
+    <div>unSubscribe
+        <button onclick="unSub()">unSubscribe</button></div>
+</body>
+<script>
+    // Create WebSocket connection.
+    const socket = new WebSocket('ws://localhost:8080');
+
+    // Connection opened
+    socket.addEventListener('open', function(event) {
+        console.log('Connected to WebSocket Server')
+    });
+
+    // Listen for messages
+    socket.addEventListener('message', function(data) {
+        console.log('Server Response:  ', data.data);
+    });
+
+    const sub = () => {
+        const myPromise = new Promise((resolve, reject) => {
+            setTimeout(() => {
+                socket.send('Subscribe')
+            }, 4000);
+            if (reject) {
+                return `error ${reject}`
+            }
+        });
+    }
+    const unSub = () => {
+        const myPromise = new Promise((resolve, reject) => {
+            setTimeout(() => {
+                socket.send('unSubscribe')
+            }, 8000);
+            if (reject) {
+                return `error ${reject}`
+            }
+        });
+    }
+</script>
+
+</html>
