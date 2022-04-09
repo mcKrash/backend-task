@@ -1,1 +1,4 @@
-###### this is TWst
+###### 
+INSTALL APP 
+######
+npm install 
